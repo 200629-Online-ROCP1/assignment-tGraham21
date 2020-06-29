@@ -18,33 +18,40 @@ public class EvaluationService {
 	 * Otherwise if it is positive, calculate the value of miles per hour, round it
 	 * and return it. For conversion and rounding use Math.round().
 	 */
-	static class SpeedConverter {
-
-		public static long toMilesPerHour(double kilometersPerHour) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+	public static long toMilesPerHour(double kilometersPerHour) {
+		double milesToKilometers = 0.621371;
+		if (kilometersPerHour < 0){
+			return -1;
 		}
-
-		/**
-		 * 1.B Speed Converter - Print Conversion
-		 * 
-		 * Write another method called printConversion with 1 parameter of type double
-		 * with the name kilometersPerHour. This method needs to return a String and
-		 * needs to calculate milesPerHour from the kilometersPerHour parameter.
-		 * 
-		 * The String should print in the format: "XX km/h = YY mi/h"
-		 * 
-		 * XX represents the original value kilometersPerHour. YY represents the rounded
-		 * milesPerHour from the kilometersPerHour parameter.
-		 * 
-		 * If the parameter kilometersPerHour is < 0, then print the text "Invalid
-		 * Value"
-		 */
-		public static String printConversion(double kilometersPerHour) {
-			// TODO Write an implementation for this method declaration
-			return null;
-		}
+		long mph = Math.round(kilometersPerHour * milesToKilometers);
+		return mph;
 	}
+
+	/**
+	 * 1.B Speed Converter - Print Conversion
+	 * 
+	 * Write another method called printConversion with 1 parameter of type double
+	 * with the name kilometersPerHour. This method needs to return a String and
+	 * needs to calculate milesPerHour from the kilometersPerHour parameter.
+	 * 
+	 * The String should print in the format: "XX km/h = YY mi/h"
+	 * 
+	 * XX represents the original value kilometersPerHour. YY represents the rounded
+	 * milesPerHour from the kilometersPerHour parameter.
+	 * 
+	 * If the parameter kilometersPerHour is < 0, then print the text "Invalid
+	 * Value"
+	 */
+	public static String printConversion(double kilometersPerHour) {
+		long value = toMilesPerHour(kilometersPerHour);
+		if(value < 0){
+			return "Invalid Value";
+		}
+		String output = kilometersPerHour + "km/h = " + value + " mi/h";
+		return output;
+	}
+
+
 
 	/**
 	 * 2. MegaBytes and KiloBytes
