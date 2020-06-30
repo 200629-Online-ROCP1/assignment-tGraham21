@@ -266,19 +266,19 @@ public class EvaluationServiceTest {
 	 ******************************************************************/
 
 	@Test
-	public void trianglesWithNoEqualSidesAreNotEquilateral() {
+	public void trianglesWithNoEqualSidesAreNotEquilateral() { 
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(5, 4, 6);
 		assertFalse(triangle.isEquilateral());
 	}
 
 	@Test
-	public void verySmallTrianglesCanBeEquilateral() {
+	public void verySmallTrianglesCanBeEquilateral() { 
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(0.5, 0.5, 0.5);
 		assertTrue(triangle.isEquilateral());
 	}
 
 	@Test
-	public void isoscelesTrianglesMustHaveAtLeastTwoEqualSides() {
+	public void isoscelesTrianglesMustHaveAtLeastTwoEqualSides() { 
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(2, 3, 4);
 		assertFalse(triangle.isIsosceles());
 	}
@@ -290,13 +290,13 @@ public class EvaluationServiceTest {
 	}
 
 	@Test
-	public void trianglesWithAllSidesEqualAreNotScalene() {
+	public void trianglesWithAllSidesEqualAreNotScalene() { 
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(4, 4, 4);
 		assertFalse(triangle.isScalene());
 	}
 
 	@Test
-	public void verySmallTrianglesCanBeScalene() {
+	public void verySmallTrianglesCanBeScalene() { 
 		EvaluationService.Triangle triangle = new EvaluationService.Triangle(0.5, 0.4, 0.6);
 		assertTrue(triangle.isScalene());
 	}

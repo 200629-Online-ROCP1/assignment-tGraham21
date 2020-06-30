@@ -2,6 +2,7 @@ package com.revature.eval.java.core;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class EvaluationService {
 
@@ -18,6 +19,7 @@ public class EvaluationService {
 	 * Otherwise if it is positive, calculate the value of miles per hour, round it
 	 * and return it. For conversion and rounding use Math.round().
 	 */
+	static class SpeedConverter {
 	public static long toMilesPerHour(double kilometersPerHour) {
 		double milesToKilometers = 0.621371;
 		if (kilometersPerHour < 0){
@@ -47,11 +49,11 @@ public class EvaluationService {
 		if(value < 0){
 			return "Invalid Value";
 		}
-		String output = kilometersPerHour + "km/h = " + value + " mi/h";
+		String output = kilometersPerHour + " km/h = " + value + " mi/h";
 		return output;
 	}
 
-
+	}
 
 	/**
 	 * 2. MegaBytes and KiloBytes
@@ -74,9 +76,14 @@ public class EvaluationService {
 	 * Value".
 	 */
 	public String printMegaBytesAndKiloBytes(int XX) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		if (XX < 0) {
+			return "Invalid Value";
+		}
+		long MB = XX/1024;
+		long remainKB= XX - (MB * 1024);
+		return XX + " KB = " + MB + " MB and " + remainKB + " KB";
 	}
+	
 
 	/**
 	 * 3. Barking Dog
@@ -98,6 +105,12 @@ public class EvaluationService {
 	 * If the hourOfDay parameter is less than 0 or greater than 23, return false.
 	 */
 	public boolean shouldWakeUp(boolean isBarking, int hourOfDay) {
+		if (hourOfDay < 0 || hourOfDay > 23) {
+			return false;
+		}
+		else if (hourOfDay < 8 || hourOfDay > 22) {
+			return isBarking;
+		}
 		// TODO Write an implementation for this method declaration
 		return false;
 	}
@@ -114,8 +127,10 @@ public class EvaluationService {
 	 * Otherwise, return false;
 	 */
 	public boolean areEqualByThreeDecimalPlaces(double firstNum, double secondNum) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		int first = (int)(firstNum * 1000);
+		int second = (int)(secondNum * 1000);
+		
+		return (first == second);
 	}
 
 	/**
@@ -131,6 +146,9 @@ public class EvaluationService {
 	static class TeenNumberChecker {
 
 		public static boolean hasTeen(int x, int y, int z) {
+			if( isTeen(x) || isTeen(y) || isTeen(z)) {
+				return true;
+			}
 			// TODO Write an implementation for this method declaration
 			return false;
 		}
@@ -139,6 +157,9 @@ public class EvaluationService {
 		// Then pass the parameter to hasTeen method
 
 		public static boolean isTeen(int number) {
+			if (number >= 13 && number <=19) {
+				return true;
+			}
 			// TODO Write an implementation for this method declaration
 			return false;
 		}
@@ -160,8 +181,13 @@ public class EvaluationService {
 	 * ZZ represents the calculated days.
 	 */
 	public String printYearsAndDays(long minutes) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		long minInYear = 60 * 24 * 365;
+		long minInDay = 60 * 24;
+		int years = (int) (minutes / minInYear);
+		int days = (int)((minutes - (years * minInYear))/minInDay);
+		
+		
+		return minutes + " min = " + years + " y and " +days + " d";
 	}
 
 	/**
@@ -174,8 +200,40 @@ public class EvaluationService {
 	 * statement or switch statement whatever is easier for you.
 	 */
 	public String printNumberInWord(int number) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String output = "OTHER";
+		switch(number) {
+			case 0:
+				output = "ZERO";
+				break;
+			case 1:
+				output = "ONE";
+				break;
+			case 2:
+				output = "TWO";
+				break;
+			case 3:
+				output = "THREE";
+				break;
+			case 4:
+				output = "FOUR";
+				break;
+			case 5:
+				output = "FIVE";
+				break;
+			case 6:
+				output = "SIX";
+				break;
+			case 7:
+				output = "SEVEN";
+				break;
+			case 8:
+				output = "EIGHT";
+				break;
+			case 9:
+				output = "NINE";
+				break;
+		}
+		return output;
 	}
 
 	/**
@@ -199,7 +257,17 @@ public class EvaluationService {
 	 */
 	public int getGreatestCommonDivisor(int first, int second) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		if (first < 10 || second < 10) {
+			return -1;
+		}
+		int limit = (first < second)? first : second;
+		int largest = 1;
+		for(int i = 1; i <= limit; i ++) {
+			if (first % i == 0 && second % i == 0) {
+				largest = i;
+			}
+		}
+		return largest;
 	}
 
 	/**
@@ -216,8 +284,14 @@ public class EvaluationService {
 	 * invalid value.
 	 */
 	public int sumFirstAndLastDigit(int num) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		if (num < 0) {
+			return -1;
+		}
+		String s = Integer.toString(num);
+		int a = Character.getNumericValue(s.charAt(0));
+		int b = Character.getNumericValue(s.charAt(s.length() - 1));
+
+		return (a + b);
 	}
 
 	/**
@@ -227,8 +301,12 @@ public class EvaluationService {
 	 * reverses a String. Example: reverse("example"); -> "elpmaxe"
 	 */
 	public String reverse(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String out = "";
+		for(int i = string.length() - 1; i >= 0; i--) {
+			out += string.charAt(i);
+		}
+		
+		return out;
 	}
 
 	/**
@@ -239,8 +317,13 @@ public class EvaluationService {
 	 * long name like Portable Network Graphics to its acronym (PNG).
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String acronym ="" +  phrase.charAt(0);
+		for(int i = 1; i < phrase.length() -1; i++) {
+			if((phrase.charAt(i) == ' ' || phrase.charAt(i) == '-' ) && i != phrase.length() - 1) {
+				acronym += Character.toUpperCase(phrase.charAt(i + 1));
+			}
+		}
+		return acronym;
 	}
 
 	/**
@@ -295,18 +378,20 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			
+			return (getSideOne() == getSideTwo() && getSideOne() == getSideThree());
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
+			if((getSideOne() == getSideTwo()) || (getSideTwo() == getSideThree()) || (getSideOne() == getSideThree()) ) {
+				return true;
+			}
 			return false;
-		}
+			}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			
+			return (getSideOne() != getSideTwo() && getSideOne() != getSideThree() && getSideTwo() != getSideThree());
 		}
 
 	}
@@ -364,7 +449,19 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		return null;
+		String out = "";
+		for(int i = 0; i < string.length()  ; i++) {
+			if(Character.isDigit(string.charAt(i))) {
+				if(out.length() == 0 && string.charAt(i) == '1') {
+					continue;
+				}
+				out += string.charAt(i);
+			}
+		}
+		if(out.length() != 10) {
+			throw new IllegalArgumentException("Incorrect Args");
+		}
+		return out;
 	}
 
 	/**
@@ -395,7 +492,13 @@ public class EvaluationService {
 	 * a number is an Armstrong number.
 	 */
 	public boolean isArmstrongNumber(int input) {
-		return false;
+		String digits = "" + input;
+		int power = digits.length();
+		int sum = 0;
+		for(int i = 0; i < digits.length(); i++ ) {
+			sum += Math.pow(Character.getNumericValue(digits.charAt(i)), power);
+		}
+		return (sum == input);
 	}
 
 	/**
@@ -430,7 +533,7 @@ public class EvaluationService {
 	/**
 	 * 19. Pangram
 	 * 
-	 * Determine if a sentence is a pangram. A pangram (Greek: παν γράμμα, pan
+	 * Determine if a sentence is a pangram. A pangram (Greek: Ï€Î±Î½ Î³Ï�Î¬Î¼Î¼Î±, pan
 	 * gramma, "every letter") is a sentence using every letter of the alphabet at
 	 * least once. The best known English pangram is:
 	 * 
@@ -456,7 +559,16 @@ public class EvaluationService {
 	 * The sum of these multiples is 78.
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		return 0;
+		int sum = 0;
+		for(int x = 1; x < i; x++) {
+			for(int num : set) {
+				if(x % num == 0) {
+					sum +=x;
+					break;
+				}
+			}
+		}
+		return sum;
 	}
 	
 	/**
@@ -470,7 +582,13 @@ public class EvaluationService {
 	 */
 	
 	public int[] threeLuckyNumbers() {
-		return null;
+		Random r = new Random();
+		int[] arr = new int[3];
+		arr[0] = r.nextInt(100);
+		arr[1] = r.nextInt(100);
+		arr[2] = r.nextInt(100);
+		
+		return arr;
 	}
 	
 	/*
@@ -484,6 +602,7 @@ public class EvaluationService {
 	 */
 	
 	public int guessingGame(int x, int y) {
-		return 0;
+		Random r = new Random();
+		return x + r.nextInt( y - x);
 	}
 }
